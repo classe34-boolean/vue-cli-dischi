@@ -1,28 +1,57 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Header 
+      :genres="allGenres" 
+      :authors="allAuthors"
+      :appGenre="currentGenre"
+      :appAuthor="currentAuthor"
+      @changedGenre="updateSelectedGenre" 
+      @changedAuthor="updateSelectedAuthor"
+    />
+
+    <Main 
+      :selectedGenre="currentGenre"
+      :selectedAuthor="currentAuthor"
+      @dataReady="setData" 
+    />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Header from './components/Header';
+import Main from './components/Main';
 
 export default {
   name: 'App',
+  data: function() {
+    return {
+      allGenres: [],
+      allAuthors: [],
+      currentGenre: '',
+      currentAuthor: ''
+    }
+  },
+  methods: {
+    setData: function(genresArray, authorsArray) {
+      this.allGenres = genresArray;
+      this.allAuthors = authorsArray;
+    },
+    updateSelectedGenre: function(newGenre) {
+      this.currentGenre = newGenre;
+      this.currentAuthor = "";
+    },
+    updateSelectedAuthor: function(newAuthor) {
+      this.currentAuthor = newAuthor;
+      this.currentGenre = "";
+    }
+  },
   components: {
-    HelloWorld
+    Header,
+    Main
   }
 }
 </script>
 
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+@import './assets/styles/general';
 </style>

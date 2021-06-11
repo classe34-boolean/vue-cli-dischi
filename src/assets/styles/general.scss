@@ -1,0 +1,13 @@
+@import '~bootstrap/scss/bootstrap';
+
+@import "~@fontsource/roboto/index.css";
+@import "~@fontsource/roboto/700.css";
+
+@import './variables';
+
+body {
+    height: 100vh;
+    font-family: $main-font;
+    background-color: $dark-color;
+    color: white;
+}
